@@ -12,11 +12,11 @@ struct node
 int tocrc=0;
 int thencountarr[1000]={0};
 class solution{
-    
+
     private:
-    
+
     protected:
-    
+
     public:
         void to_print(node *top)
         {
@@ -25,6 +25,18 @@ class solution{
                cout<<ptr->input<<" ";
             }
             cout<<endl;
+        }
+        void insertBeg(node *&top, int val)
+        {
+            node *p=new node;
+            p->input=val;
+            if(top==NULL)
+            {
+                top=p;
+                return;
+            }
+            p->then=top;
+            top=p;
         }
         void function0(node *&top, int x)
         {
@@ -43,47 +55,13 @@ class solution{
             }
             ptr->then=p;
         }
-        void function3(node *&top, int x, int p)
-        {
-            node *ptr= new node;
-            ptr=top;
-            node *temp=new node;
-            for(;ptr!=NULL and ptr->input!=x;ptr=ptr->then){}
-            thencountarr[ptr->then->input]--;
-            temp=ptr;
-            int i=0;
-            while(i<p)
-            {
-                if(temp->then==NULL)
-                {
-                    temp->then=top;
-                    tocrc=1;
-                }
-                temp=temp->then;
-                i++;
-            }
-            ptr->then=temp;
-            thencountarr[temp->input]++;
-        }
-        void insertBeg(node *&top, int val)
-        {
-            node *p=new node;
-            p->input=val;
-            if(top==NULL)
-            {
-                top=p;
-                return;
-            }
-            p->then=top;
-            top=p;
-        }
         void function1(node *&top, int y, int x)
         {
             node *ptr=new node;
             ptr=top;
             for(;ptr!=NULL and ptr->input!=y; ptr=ptr->then)
             {
-               
+
             }
             if(ptr==NULL)
             {
@@ -138,7 +116,28 @@ class solution{
             p->then=pointer->then;
             pointer->then=p;
         }
-        
+        void function3(node *&top, int x, int p)
+        {
+            node *ptr= new node;
+            ptr=top;
+            node *temp=new node;
+            for(;ptr!=NULL and ptr->input!=x;ptr=ptr->then){}
+            thencountarr[ptr->then->input]--;
+            temp=ptr;
+            int i=0;
+            while(i<p)
+            {
+                if(temp->then==NULL)
+                {
+                    temp->then=top;
+                    tocrc=1;
+                }
+                temp=temp->then;
+                i++;
+            }
+            ptr->then=temp;
+            thencountarr[temp->input]++;
+        }
         void input_Output()
         {
             #ifndef ONLINE_JUDGE
@@ -165,7 +164,7 @@ int32_t main()
             if(select==0)
             {
                 int x;
-                cin>>x;  
+                cin>>x;
                 obj.function0(top, x);
             }
             else if(select==1)
